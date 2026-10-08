@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { AlertTriangle, Bot, Compass, FileText, FlaskConical, Globe, MapPin, Search, Sparkles as _unused, TrendingUp, Wand2 } from "lucide-react";
+import { AlertTriangle, Bot, Compass, FileText, FlaskConical, Globe, MapPin, Search, TrendingUp, Wand2 } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-void _unused;
 
 export function Logo({ className }: { className?: string }) {
   return (
