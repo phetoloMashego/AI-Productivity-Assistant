@@ -77,6 +77,8 @@ export type Report = {
   report: string;
   createdAt: string;
   demo?: boolean;
+  reference?: string;
+  history?: { status: ReportStatus; at: string; note?: string }[];
 };
 
 const daysAgo = (n: number) => new Date(Date.now() - n * 86400000).toISOString();
@@ -121,3 +123,30 @@ export function looksLikeEmergency(text: string) {
   const t = text.toLowerCase();
   return EMERGENCY_WORDS.some((w) => t.includes(w));
 }
+
+// DEMO municipal contacts — fictional numbers, for prototype display only.
+export type MunicipalContact = { department: string; municipality: string; phone: string; email: string; hours: string };
+const MUNI: Record<string, string> = {
+  "Cape Town": "City of Cape Town (demo)", Gqeberha: "Nelson Mandela Bay (demo)", Johannesburg: "City of Johannesburg (demo)",
+  Durban: "eThekwini (demo)", Pretoria: "City of Tshwane (demo)", Bloemfontein: "Mangaung (demo)",
+};
+export function deptFor(category: string) {
+  const c = category.toLowerCase();
+  if (/water/.test(c)) return "Water & Sanitation";
+  if (/electric|streetlight/.test(c)) return "Electricity Services";
+  if (/waste|dump/.test(c)) return "Solid Waste Management";
+  if (/road|pothole/.test(c)) return "Roads & Stormwater";
+  return "General Service Desk";
+}
+export function contactFor(category: string, area: string): MunicipalContact {
+  const city = AREAS.find((a) => area.toLowerCase().includes(a.toLowerCase()));
+  const dept = deptFor(category);
+  return {
+    department: dept,
+    municipality: city ? MUNI[city] : "Your local municipality",
+    phone: "0800 000 000 (demo)",
+    email: `${dept.split(" ")[0].toLowerCase()}@example.org (demo)`,
+    hours: "Mon–Fri 07:30–16:00 (demo)",
+  };
+}
+export type StatusEvent = { status: ReportStatus; at: string; note?: string };
