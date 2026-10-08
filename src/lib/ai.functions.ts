@@ -64,7 +64,7 @@ const str = { type: "string" };
 const strArr = { type: "array", items: str };
 
 export const classifyIssue = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ description: z.string().min(1).max(4000), area: z.string().max(200).optional() }))
+  .validator(z.object({ description: z.string().min(1).max(4000), area: z.string().max(200).optional() }))
   .handler(async ({ data }): Promise<Classification & { source: "ai" | "demo" }> => {
     try {
       const text = await callAI(
@@ -89,7 +89,7 @@ const reportInput = z.object({
 });
 
 export const generateReport = createServerFn({ method: "POST" })
-  .inputValidator(reportInput)
+  .validator(reportInput)
   .handler(async ({ data }) => {
     try {
       const text = await callAI(
@@ -104,7 +104,7 @@ export const generateReport = createServerFn({ method: "POST" })
   });
 
 export const simplifyInformation = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ text: z.string().min(1).max(12000) }))
+  .validator(z.object({ text: z.string().min(1).max(12000) }))
   .handler(async ({ data }): Promise<Simplified & { source: "ai" | "demo" }> => {
     try {
       const text = await callAI(
@@ -120,7 +120,7 @@ export const simplifyInformation = createServerFn({ method: "POST" })
   });
 
 export const recommendServices = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ query: z.string().min(1).max(1000) }))
+  .validator(z.object({ query: z.string().min(1).max(1000) }))
   .handler(async ({ data }) => {
     const valid = new Set(SERVICES.map((s) => s.id));
     try {
@@ -139,7 +139,7 @@ export const recommendServices = createServerFn({ method: "POST" })
   });
 
 export const communityAssistant = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ messages: z.array(z.object({ role: z.enum(["user", "assistant"]), content: z.string().max(8000) })).min(1).max(40) }))
+  .validator(z.object({ messages: z.array(z.object({ role: z.enum(["user", "assistant"]), content: z.string().max(8000) })).min(1).max(40) }))
   .handler(async ({ data }) => {
     try {
       const text = await callAI(
