@@ -127,7 +127,7 @@ function ReportsPage() {
                       </>
                     )}
                     {idx >= 2 && idx < 4 && (
-                      <Button variant="outline" onClick={() => { const next = STATUSES[idx + 1]; advance(selected, next, "Demo status update"); toast.success(`Status updated to ${next} (demo)`); }}>Simulate next status</Button>
+                      <Button variant="outline" onClick={() => { const next = STATUSES[idx + 1] ?? "Resolved"; advance(selected, next, "Demo status update"); toast.success(`Status updated to ${next} (demo)`); }}>Simulate next status</Button>
                     )}
                     <Button variant="ghost" className="text-destructive" onClick={() => setConfirm({ type: "delete", id: selected.id })}><Trash2 className="h-4 w-4" /> Delete</Button>
                   </div>

@@ -47,7 +47,7 @@ export function mockClassify(description: string, area?: string): Classification
   };
 }
 
-export function mockReport(input: { description: string; category?: string; area?: string; address?: string; date?: string; urgency?: string }) {
+export function mockReport(input: { description: string; category?: string | undefined; area?: string | undefined; address?: string | undefined; date?: string | undefined; urgency?: string | undefined }) {
   const c = mockClassify(input.description, input.area);
   const type = input.category && input.category !== "Other" ? input.category : c.category;
   const location = [input.address, input.area].filter(Boolean).join(", ") || "Not provided — please add an approximate location";

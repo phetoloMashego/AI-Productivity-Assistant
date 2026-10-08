@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bot, FileText, FolderOpen, LayoutDashboard, Menu, MapPin, Search, Settings, ShieldCheck } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 function Shell() {
   const [open, setOpen] = useState(false);
   const { lang } = useLanguage();
+  useEffect(() => { document.documentElement.classList.toggle("large-text", localStorage.getItem("moya-large") === "1"); }, []);
   return (
     <div className="min-h-screen bg-muted/40">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground">Skip to content</a>

@@ -11,7 +11,7 @@ type JsonSchema = { name: string; schema: Record<string, unknown> };
 
 /** Streams a Responses API call server-side and returns the final text. Throws on failure. */
 async function callAI(instructions: string, input: { role: "user" | "assistant"; content: string }[], json?: JsonSchema) {
-  const key = process.env.LOVABLE_API_KEY;
+  const key = process.env["LOVABLE_API_KEY"];
   if (!key) throw new Error("AI not configured");
   const res = await fetch("https://ai.gateway.lovable.dev/v1/responses", {
     method: "POST",
@@ -149,6 +149,6 @@ export const communityAssistant = createServerFn({ method: "POST" })
       return { reply: text, source: "ai" as const };
     } catch (e) {
       console.error("assistant fallback", e);
-      return { reply: mockAssistant(data.messages[data.messages.length - 1].content), source: "demo" as const };
+      return { reply: mockAssistant(data.messages[data.messages.length - 1]?.content ?? ""), source: "demo" as const };
     }
   });

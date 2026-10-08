@@ -143,9 +143,9 @@ export function contactFor(category: string, area: string): MunicipalContact {
   const dept = deptFor(category);
   return {
     department: dept,
-    municipality: city ? MUNI[city] : "Your local municipality",
+    municipality: (city && MUNI[city]) || "Your local municipality",
     phone: "0800 000 000 (demo)",
-    email: `${dept.split(" ")[0].toLowerCase()}@example.org (demo)`,
+    email: `${(dept.split(" ")[0] ?? "info").toLowerCase()}@example.org (demo)`,
     hours: "Mon–Fri 07:30–16:00 (demo)",
   };
 }

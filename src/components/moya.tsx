@@ -126,7 +126,7 @@ const TOUR = [
 export function TourButton({ variant = "outline", className }: { variant?: "outline" | "default" | "secondary"; className?: string }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
-  const s = TOUR[step];
+  const s = TOUR[step] ?? TOUR[0];
   return (
     <>
       <Button variant={variant} className={className} onClick={() => { setStep(0); setOpen(true); }}>

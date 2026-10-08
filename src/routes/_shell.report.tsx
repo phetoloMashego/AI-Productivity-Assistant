@@ -50,9 +50,9 @@ function ReportPage() {
 
   function validate() {
     const e: Record<string, string> = {};
-    if (f.description.trim().length < 10) e.description = "Please describe the problem in at least a few words.";
-    if (f.description.length > 4000) e.description = "Please keep the description under 4000 characters.";
-    if (!f.area.trim()) e.area = "Please add an area, suburb or landmark — approximate is fine.";
+    if (f.description.trim().length < 10) e["description"] = "Please describe the problem in at least a few words.";
+    if (f.description.length > 4000) e["description"] = "Please keep the description under 4000 characters.";
+    if (!f.area.trim()) e["area"] = "Please add an area, suburb or landmark — approximate is fine.";
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -104,8 +104,8 @@ function ReportPage() {
         <form className="space-y-5 rounded-2xl border bg-card p-5 shadow-soft sm:p-6" onSubmit={(e) => { e.preventDefault(); void runReport(); }} noValidate>
           <div>
             <Label htmlFor="desc" className="text-base">What's happening? *</Label>
-            <Textarea id="desc" rows={5} value={f.description} onChange={(e) => set("description", e.target.value)} placeholder="e.g. There's a big water leak by the shops…" className="mt-2 text-base" aria-invalid={!!errors.description} aria-describedby="desc-err" maxLength={4000} />
-            {errors.description && <p id="desc-err" className="mt-1 text-sm font-medium text-destructive">{errors.description}</p>}
+            <Textarea id="desc" rows={5} value={f.description} onChange={(e) => set("description", e.target.value)} placeholder="e.g. There's a big water leak by the shops…" className="mt-2 text-base" aria-invalid={!!errors["description"]} aria-describedby="desc-err" maxLength={4000} />
+            {errors["description"] && <p id="desc-err" className="mt-1 text-sm font-medium text-destructive">{errors["description"]}</p>}
             <div className="mt-2 flex flex-wrap gap-2">
               {EXAMPLES.map((ex) => (
                 <button type="button" key={ex} onClick={() => set("description", ex)} className="rounded-full border bg-muted px-3 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground">
@@ -132,8 +132,8 @@ function ReportPage() {
             </div>
             <div>
               <Label htmlFor="area" className="text-base">Area / suburb *</Label>
-              <Input id="area" value={f.area} onChange={(e) => set("area", e.target.value)} placeholder="e.g. Bellville, Cape Town" className="mt-2" aria-invalid={!!errors.area} maxLength={200} />
-              {errors.area && <p className="mt-1 text-sm font-medium text-destructive">{errors.area}</p>}
+              <Input id="area" value={f.area} onChange={(e) => set("area", e.target.value)} placeholder="e.g. Bellville, Cape Town" className="mt-2" aria-invalid={!!errors["area"]} maxLength={200} />
+              {errors["area"] && <p className="mt-1 text-sm font-medium text-destructive">{errors["area"]}</p>}
             </div>
             <div>
               <Label htmlFor="addr" className="text-base">Address or landmark <span className="text-muted-foreground">(optional)</span></Label>
