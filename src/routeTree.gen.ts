@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as ShellAssistantRouteImport } from './routes/_shell.assistant'
+import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
+import { Route as ShellInformationRouteImport } from './routes/_shell.information'
+import { Route as ShellReportRouteImport } from './routes/_shell.report'
+import { Route as ShellReportsRouteImport } from './routes/_shell.reports'
+import { Route as ShellResponsibleAiRouteImport } from './routes/_shell.responsible-ai'
+import { Route as ShellServicesRouteImport } from './routes/_shell.services'
+import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellAssistantRoute = ShellAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellDashboardRoute = ShellDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellInformationRoute = ShellInformationRouteImport.update({
+  id: '/information',
+  path: '/information',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellReportRoute = ShellReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellReportsRoute = ShellReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellResponsibleAiRoute = ShellResponsibleAiRouteImport.update({
+  id: '/responsible-ai',
+  path: '/responsible-ai',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellServicesRoute = ShellServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof ShellAssistantRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/information': typeof ShellInformationRoute
+  '/report': typeof ShellReportRoute
+  '/reports': typeof ShellReportsRoute
+  '/responsible-ai': typeof ShellResponsibleAiRoute
+  '/services': typeof ShellServicesRoute
+  '/settings': typeof ShellSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof ShellAssistantRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/information': typeof ShellInformationRoute
+  '/report': typeof ShellReportRoute
+  '/reports': typeof ShellReportsRoute
+  '/responsible-ai': typeof ShellResponsibleAiRoute
+  '/services': typeof ShellServicesRoute
+  '/settings': typeof ShellSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/_shell/assistant': typeof ShellAssistantRoute
+  '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/information': typeof ShellInformationRoute
+  '/_shell/report': typeof ShellReportRoute
+  '/_shell/reports': typeof ShellReportsRoute
+  '/_shell/responsible-ai': typeof ShellResponsibleAiRoute
+  '/_shell/services': typeof ShellServicesRoute
+  '/_shell/settings': typeof ShellSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/assistant'
+    | '/dashboard'
+    | '/information'
+    | '/report'
+    | '/reports'
+    | '/responsible-ai'
+    | '/services'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/assistant'
+    | '/dashboard'
+    | '/information'
+    | '/report'
+    | '/reports'
+    | '/responsible-ai'
+    | '/services'
+    | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/_shell'
+    | '/_shell/assistant'
+    | '/_shell/dashboard'
+    | '/_shell/information'
+    | '/_shell/report'
+    | '/_shell/reports'
+    | '/_shell/responsible-ai'
+    | '/_shell/services'
+    | '/_shell/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,99 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell/assistant': {
+      id: '/_shell/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof ShellAssistantRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/dashboard': {
+      id: '/_shell/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ShellDashboardRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/information': {
+      id: '/_shell/information'
+      path: '/information'
+      fullPath: '/information'
+      preLoaderRoute: typeof ShellInformationRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/report': {
+      id: '/_shell/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ShellReportRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/reports': {
+      id: '/_shell/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ShellReportsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/responsible-ai': {
+      id: '/_shell/responsible-ai'
+      path: '/responsible-ai'
+      fullPath: '/responsible-ai'
+      preLoaderRoute: typeof ShellResponsibleAiRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/services': {
+      id: '/_shell/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ShellServicesRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
+interface ShellRouteChildren {
+  ShellAssistantRoute: typeof ShellAssistantRoute
+  ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellInformationRoute: typeof ShellInformationRoute
+  ShellReportRoute: typeof ShellReportRoute
+  ShellReportsRoute: typeof ShellReportsRoute
+  ShellResponsibleAiRoute: typeof ShellResponsibleAiRoute
+  ShellServicesRoute: typeof ShellServicesRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellAssistantRoute: ShellAssistantRoute,
+  ShellDashboardRoute: ShellDashboardRoute,
+  ShellInformationRoute: ShellInformationRoute,
+  ShellReportRoute: ShellReportRoute,
+  ShellReportsRoute: ShellReportsRoute,
+  ShellResponsibleAiRoute: ShellResponsibleAiRoute,
+  ShellServicesRoute: ShellServicesRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
